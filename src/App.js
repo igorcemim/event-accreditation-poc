@@ -7,20 +7,32 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null,
+      user: this.retrieveUser(),
       handleLogout: this.handleLogout,
       handleLogin: this.handleLogin,
     }
   }
 
-  handleLogin = () => {
-    console.log(this.state);
-    this.setState({ user: 'john@doe.com' });
+  retrieveUser = () => {
+    const userStorage = localStorage.getItem('user');
+    if (userStorage !== null) {
+      return JSON.parse(userStorage);
+    }
+    return null;
   }
 
-  handleLogout = () => {
-    console.log(this.state);
-    this.setState({ user: null });
+  handleLogin = (callback = () => {}) => {
+    const user = {
+      'username': 'johndoe@email.com',
+    }
+    const userStorage = JSON.stringify(user);
+    localStorage.setItem('user', userStorage);
+    this.setState({ user }, callback);
+  }
+
+  handleLogout = (callback = () => {}) => {
+    localStorage.removeItem('user');
+    this.setState({ user: null }, callback);
   }
 
   render() {

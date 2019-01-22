@@ -10,6 +10,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+import AppContext from '../Context';
 
 const styles = theme => ({
   main: {
@@ -43,8 +44,10 @@ const styles = theme => ({
   },
 });
 
-function SignIn(props) {
+const Login = (props) => {
   const { classes } = props;
+
+  const loginCallback = () => props.history.push('/');
 
   return (
     <main className={classes.main}>
@@ -65,23 +68,28 @@ function SignIn(props) {
             <InputLabel htmlFor="password">Senha</InputLabel>
             <Input name="password" type="password" id="password" />
           </FormControl>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Entrar
-          </Button>
+          <AppContext.Consumer>{
+            context => (
+            <Button
+              type="button"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={() => context.handleLogin(loginCallback)}
+            >
+              Entrar
+            </Button>
+          )}
+          </AppContext.Consumer>
         </form>
       </Paper>
     </main>
   );
 }
 
-SignIn.propTypes = {
+Login.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SignIn);
+export default withStyles(styles)(Login);

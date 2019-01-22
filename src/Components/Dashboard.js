@@ -41,7 +41,7 @@ const MenuListItems = (props) => {
         <MenuRoute to="/credenciamento" icon={<PeopleIcon />} primary="Credenciamento" />
         <AppContext.Consumer>{
           context => (
-            <MenuItem onClick={context.handleLogout}>
+            <MenuItem onClick={() => context.handleLogout()}>
               <ListItemIcon>
                 <ExitIcon />
               </ListItemIcon>
