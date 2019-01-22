@@ -1,3 +1,3 @@
-# POC Credenciamento de Eventos
+# PoC Credenciamento de Eventos
 
-POC de um PWA para credenciamento de eventos utilizando leitura de QR Code.
+PoC de um PWA para credenciamento de eventos utilizando leitura de QR Code.
